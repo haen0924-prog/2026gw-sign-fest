@@ -126,6 +126,7 @@ section{padding-block:56px 8px}
 @keyframes drop{from{transform:translateY(-14px) rotate(-6deg);opacity:.3}}
 .gb-ex{font-size:.7rem;background:var(--chip);color:var(--muted);border-radius:6px;padding:1px 6px;margin-left:6px}
 .gb-more{margin-top:16px}
+.gb-more[hidden]{display:none}
 @media (max-width:760px){.gb-form{grid-template-columns:1fr}.gb-form .cnt{grid-column:1}.gb-form .btn{width:100%;justify-content:center}}
 @media (prefers-reduced-motion:reduce){.gb-card.new{animation:none}}
 
@@ -273,7 +274,7 @@ footer b{color:var(--ink);font-weight:500}
 <script>
 // ===== 한줄 방명록 (Supabase) =====
 // ▼ 여기 두 줄만 바꾸면 됩니다 (Supabase → Project Settings → API)
-const SUPABASE_URL = 'https://https://njrbqfyxxwobthzrhqzm.supabase.co/';
+const SUPABASE_URL = 'https://njrbqfyxxwobthzrhqzm.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qcmJxZnl4eHdvYnRoenJocXptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5NDkxODUsImV4cCI6MjA4OTUyNTE4NX0.8lw0F6jzaMHlBqaiHoEtywLsANdcQDLJVCqiSdwPFMg';
 
 (function(){
@@ -324,12 +325,23 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
   }
 
   const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // 오류 원인을 쉬운 말로 바꿔 보여주기
+  function why(err) {
+    const m = (err && (err.message || err.code || String(err))) || '';
+    if (/fetch|network|load failed/i.test(m)) return '서버에 연결할 수 없어요. 주소(URL)를 확인하거나, 배포된 사이트에서 열어 주세요';
+    if (/relation|does not exist|42P01|PGRST205/i.test(m)) return 'guestbook 표가 없어요. SQL을 먼저 실행해 주세요';
+    if (/row-level security|42501|permission denied/i.test(m)) return '쓰기 권한이 없어요. SQL의 권한 설정 부분을 실행해 주세요';
+    if (/api key|jwt|apikey|401/i.test(m)) return '키(anon key)가 맞지 않아요';
+    if (/check constraint|23514/i.test(m)) return '글자 수를 확인해 주세요';
+    return m;
+  }
 
   async function load() {
     let q = db.from('guestbook').select('id,name,message,created_at').order('id', { ascending: false }).limit(PAGE);
     if (oldest) q = q.lt('id', oldest);
-    const { data, error } = await q;
-    if (error) { say('방명록을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
+    let data, error;
+    try { ({ data, error } = await q); } catch (e) { error = e; }
+    if (error) { console.error(error); say('방명록을 불러오지 못했어요. (' + why(error) + ')', true); return; }
     if (!data.length && !oldest) say('첫 번째 단풍잎을 남겨주세요!');
     add(data, 'bottom');
     if (data.length) oldest = data[data.length - 1].id;
@@ -342,9 +354,10 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
     const message = textIn.value.trim(), name = nameIn.value.trim();
     if (!message) { say('메시지를 입력해 주세요.', true); textIn.focus(); return; }
     btn.disabled = true; btn.textContent = '보내는 중…';
-    const { data, error } = await db.from('guestbook').insert({ name: name || null, message }).select().single();
+    let data, error;
+    try { ({ data, error } = await db.from('guestbook').insert({ name: name || null, message }).select().single()); } catch (e) { error = e; }
     btn.disabled = false; btn.textContent = '남기기';
-    if (error) { say('저장하지 못했어요. 인터넷 연결을 확인하고 다시 눌러주세요.', true); return; }
+    if (error) { console.error(error); say('저장하지 못했어요. (' + why(error) + ')', true); return; }
     add([data], 'top'); textIn.value = ''; cnt.textContent = '0 / 60'; say('방명록에 남겼어요. 고맙습니다!');
   });
 
