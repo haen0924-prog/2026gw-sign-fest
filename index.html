@@ -113,6 +113,51 @@ section{padding-block:56px 8px}
 .booth.star{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 14%,var(--paper))}
 .booth.star .no{background:var(--amber)}
 .booth[hidden]{display:none}
+.map-wrap{margin-bottom:22px}
+.map-scroll{overflow-x:auto;border-radius:18px;border:1px solid var(--line);-webkit-overflow-scrolling:touch}
+.fmap{display:block;width:100%;height:auto}
+.fmap .mlab text{font:700 17px var(--f-body);fill:#3b2418}
+.fmap .tn{font:400 21px var(--f-display);fill:#3b2418}
+.fmap .tl2{font:700 15px var(--f-body);fill:#fffaf1}
+.fmap a.tent{cursor:pointer}
+.fmap a.tent>*{transition:transform .2s}
+.fmap a.tent:hover>*,.fmap a.tent:focus-visible>*{transform:translateY(-5px)}
+.fmap a.tent:focus-visible{outline:none}
+.map-hint{font-size:.85rem;color:var(--muted);margin:8px 2px 0}
+@media (max-width:700px){.fmap{min-width:640px}}
+.map-wrap{position:relative}
+.fmap a.tent.sel>*{transform:translateY(-6px)}
+.fmap a.tent.sel use:first-child{filter:drop-shadow(0 0 6px #f2b85a) drop-shadow(0 0 2px #f2b85a)}
+.pop{position:absolute;z-index:4;width:min(320px,calc(100% - 16px));background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:16px;padding:16px 18px 14px;box-shadow:0 14px 34px -12px rgba(60,30,10,.45)}
+.pop::after{content:"";position:absolute;left:var(--ax,50%);width:16px;height:16px;background:var(--paper);border:1.5px solid var(--ink);transform:translateX(-50%) rotate(45deg)}
+.pop.up::after{bottom:-9px;border-top:0;border-left:0}
+.pop.down::after{top:-9px;border-bottom:0;border-right:0}
+.pop-x{position:absolute;top:6px;right:8px;width:34px;height:34px;border:0;background:none;font-size:1.5rem;line-height:1;color:var(--muted);cursor:pointer;border-radius:50%}
+.pop-x:hover{background:var(--chip)}
+.pop-head{display:flex;align-items:center;gap:10px;padding-right:30px}
+.pop .no{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--maple);color:#fff;font-family:var(--f-display);font-size:1.05rem}
+.pop .bt{font-size:.75rem;font-weight:700;letter-spacing:.05em;color:var(--moss)}
+.pop h3{font-size:1.08rem;line-height:1.4;margin-top:8px}
+.pop p{margin:4px 0 0;font-size:.92rem}
+.pop small{display:block;margin-top:6px;font-size:.82rem;color:var(--muted)}
+.pop small:empty{display:none}
+.pop-nav{display:flex;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.pop-nav button{font:inherit;font-size:.88rem;font-weight:500;border:0;background:var(--chip);color:var(--ink);padding:7px 12px;border-radius:999px;cursor:pointer}
+.pop-x:focus-visible,.pop-nav button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.blist{margin-top:6px}
+.blist summary{cursor:pointer;font-weight:700;padding:12px 18px;border:1.5px solid var(--line);border-radius:999px;display:inline-block;background:var(--paper);list-style:none}
+.blist summary::-webkit-details-marker{display:none}
+.blist summary::before{content:"▸ ";color:var(--maple)}
+.blist[open] summary::before{content:"▾ "}
+.blist summary span{color:var(--muted);font-weight:400}
+.blist[open] summary{margin-bottom:16px}
+@media (max-width:700px){
+  .pop{position:fixed;left:0;right:0;bottom:0;top:auto!important;width:auto;border-radius:20px 20px 0 0;border-bottom:0;padding:18px 20px calc(16px + env(safe-area-inset-bottom,0px));animation:sheet .25s ease-out}
+  .pop::after{display:none}
+  @keyframes sheet{from{transform:translateY(100%)}}
+}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}}
+@media (prefers-reduced-motion:reduce){.fmap a.tent>*{transition:none}}
 
 /* place */
 .place{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -235,22 +280,86 @@ footer b{color:var(--ink);font-weight:500}
 
   <section id="events">
     <div class="sec-head"><svg class="leaf-mark" viewBox="0 0 24 24"><use href="#maple"/></svg><h2>부대행사 부스</h2><p>11:00~16:00 (12:00~13:00 쉬는 시간)</p></div>
+    <div class="map-wrap"><div class="map-scroll"><svg class="fmap" viewBox="0 0 1000 720" role="img" aria-labelledby="fmapT">
+<title id="fmapT">2026 강원수어문화제 행사장 배치도</title>
+<defs>
+<linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c35a"/><stop offset=".55" stop-color="#e2672b"/><stop offset="1" stop-color="#8e2f23"/></linearGradient>
+<symbol id="tent" viewBox="0 0 100 112"><line x1="9" y1="46" x2="9" y2="110" stroke="#5a3a28" stroke-width="3"/><line x1="91" y1="46" x2="91" y2="110" stroke="#5a3a28" stroke-width="3"/>
+<rect x="9" y="56" width="82" height="40" fill="#fff6e6"/><rect x="14" y="84" width="72" height="16" rx="2" fill="#c98a5a"/><rect x="14" y="84" width="72" height="5" fill="#e8c9a2"/>
+<polygon points="50,0 100,46 0,46" fill="currentColor"/><polygon points="50,0 63,46 37,46" fill="#fff" opacity=".45"/>
+<path d="M0 46h100v8a6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0 6 6 0 0 1-12.5 0z" fill="currentColor"/></symbol>
+<symbol id="ppl" viewBox="0 0 20 40"><circle cx="10" cy="7" r="6" fill="#f1c9a5"/><path d="M10 4a6 6 0 0 0-6 4h12a6 6 0 0 0-6-4z" fill="#3b2418"/><rect x="2" y="14" width="16" height="17" rx="6" fill="currentColor"/><rect x="4" y="29" width="5" height="10" rx="2" fill="#4a3a30"/><rect x="11" y="29" width="5" height="10" rx="2" fill="#4a3a30"/></symbol>
+</defs>
+<rect width="1000" height="720" rx="18" fill="#f3e4c6"/>
+<path d="M0 225 Q500 200 1000 225 V720 H0z" fill="#d9d29a" opacity=".55"/>
+<path d="M20 520 Q480 505 990 470" stroke="#ead8b4" stroke-width="44" fill="none" stroke-linecap="round"/>
+<rect x="37" y="40" width="6" height="30" fill="#6b4330"/><circle cx="40" cy="40" r="30" fill="#e2672b"/><circle cx="26.5" cy="50.5" r="21.0" fill="#e2672b" opacity=".85"/>
+<rect x="92" y="25" width="6" height="22" fill="#6b4330"/><circle cx="95" cy="25" r="22" fill="#f2b14a"/><circle cx="85.1" cy="32.7" r="15.399999999999999" fill="#f2b14a" opacity=".85"/>
+<rect x="327" y="22" width="6" height="20" fill="#6b4330"/><circle cx="330" cy="22" r="20" fill="#c9452a"/><circle cx="321.0" cy="29.0" r="14.0" fill="#c9452a" opacity=".85"/>
+<rect x="972" y="430" width="6" height="26" fill="#6b4330"/><circle cx="975" cy="430" r="26" fill="#e2672b"/><circle cx="963.3" cy="439.1" r="18.2" fill="#e2672b" opacity=".85"/>
+<rect x="27" y="680" width="6" height="26" fill="#6b4330"/><circle cx="30" cy="680" r="26" fill="#c9452a"/><circle cx="18.299999999999997" cy="689.1" r="18.2" fill="#c9452a" opacity=".85"/>
+<rect x="972" y="670" width="6" height="30" fill="#6b4330"/><circle cx="975" cy="670" r="30" fill="#e9a23b"/><circle cx="961.5" cy="680.5" r="21.0" fill="#e9a23b" opacity=".85"/>
+<rect x="787" y="28" width="6" height="18" fill="#6b4330"/><circle cx="790" cy="28" r="18" fill="#d9541e"/><circle cx="781.9" cy="34.3" r="12.6" fill="#d9541e" opacity=".85"/>
+<g><rect x="18" y="240" width="96" height="88" fill="#efe5d6" stroke="#6b4330" stroke-width="2"/><rect x="14" y="230" width="104" height="14" fill="#8a5a3c"/><rect x="34" y="280" width="22" height="48" fill="#b0886a"/><rect x="76" y="280" width="22" height="48" fill="#b0886a"/></g>
+<g transform="translate(60 0)"><rect x="370" y="22" width="300" height="118" rx="4" fill="#4a2e22"/><rect x="386" y="36" width="268" height="88" rx="3" fill="url(#scr)"/>
+<path d="M430 110 l14-22 l14 22z M600 116 l10-16 l10 16z" fill="#fff" opacity=".35"/>
+<rect x="348" y="40" width="16" height="80" rx="3" fill="#2e1d15"/><rect x="676" y="40" width="16" height="80" rx="3" fill="#2e1d15"/>
+<polygon points="335,140 705,140 740,192 300,192" fill="#9a6644"/><rect x="300" y="192" width="440" height="20" fill="#6b4330"/></g>
+<use href="#ppl" x="530" y="128" width="22" height="44" color="#2f6f8f"/>
+<use href="#ppl" x="580" y="128" width="22" height="44" color="#d9541e"/>
+<use href="#ppl" x="630" y="128" width="22" height="44" color="#6f7f3e"/>
+<rect x="452" y="256" width="320" height="158" rx="12" fill="#efd9b0" stroke="#d1b07c" stroke-dasharray="6 5"/><rect x="465" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="267.0" r="5.5" fill="#e9a23b"/><rect x="495" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="267.0" r="5.5" fill="#d9541e"/><rect x="525" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="267.0" r="5.5" fill="#9b3a2a"/><rect x="555" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="267.0" r="5.5" fill="#9b3a2a"/><rect x="585" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="595" cy="267.0" r="5.5" fill="#9b3a2a"/><rect x="615" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="267.0" r="5.5" fill="#d9541e"/><rect x="645" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="267.0" r="5.5" fill="#d9541e"/><rect x="675" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="267.0" r="5.5" fill="#9b3a2a"/><rect x="705" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="267.0" r="5.5" fill="#9b3a2a"/><rect x="735" y="268.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="745" cy="267.0" r="5.5" fill="#e9a23b"/><rect x="465" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="495" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="525" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="280.5" r="5.5" fill="#9b3a2a"/><rect x="555" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="280.5" r="5.5" fill="#e9a23b"/><rect x="585" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="595" cy="280.5" r="5.5" fill="#e9a23b"/><rect x="615" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="280.5" r="5.5" fill="#e9a23b"/><rect x="645" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="280.5" r="5.5" fill="#9b3a2a"/><rect x="675" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="280.5" r="5.5" fill="#7a5a46"/><rect x="705" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="280.5" r="5.5" fill="#9b3a2a"/><rect x="735" y="281.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="465" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="294.0" r="5.5" fill="#d9541e"/><rect x="495" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="294.0" r="5.5" fill="#d9541e"/><rect x="525" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="555" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="585" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="595" cy="294.0" r="5.5" fill="#9b3a2a"/><rect x="615" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="294.0" r="5.5" fill="#6f7f3e"/><rect x="645" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="294.0" r="5.5" fill="#2f6f8f"/><rect x="675" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="294.0" r="5.5" fill="#e9a23b"/><rect x="705" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="735" y="295.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="465" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="307.5" r="5.5" fill="#9b3a2a"/><rect x="495" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="307.5" r="5.5" fill="#2f6f8f"/><rect x="525" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="555" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="585" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="595" cy="307.5" r="5.5" fill="#d9541e"/><rect x="615" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="307.5" r="5.5" fill="#2f6f8f"/><rect x="645" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="307.5" r="5.5" fill="#6f7f3e"/><rect x="675" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="307.5" r="5.5" fill="#2f6f8f"/><rect x="705" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="307.5" r="5.5" fill="#7a5a46"/><rect x="735" y="308.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="745" cy="307.5" r="5.5" fill="#9b3a2a"/><rect x="465" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="495" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="525" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="321.0" r="5.5" fill="#7a5a46"/><rect x="555" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="321.0" r="5.5" fill="#2f6f8f"/><rect x="585" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="615" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="321.0" r="5.5" fill="#d9541e"/><rect x="645" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="675" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="321.0" r="5.5" fill="#7a5a46"/><rect x="705" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="321.0" r="5.5" fill="#7a5a46"/><rect x="735" y="322.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="465" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="495" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="525" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="555" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="334.5" r="5.5" fill="#2f6f8f"/><rect x="585" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="615" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="334.5" r="5.5" fill="#2f6f8f"/><rect x="645" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="334.5" r="5.5" fill="#9b3a2a"/><rect x="675" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="685" cy="334.5" r="5.5" fill="#d9541e"/><rect x="705" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="334.5" r="5.5" fill="#6f7f3e"/><rect x="735" y="335.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="745" cy="334.5" r="5.5" fill="#e9a23b"/><rect x="465" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="348.0" r="5.5" fill="#2f6f8f"/><rect x="495" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="348.0" r="5.5" fill="#2f6f8f"/><rect x="525" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="348.0" r="5.5" fill="#6f7f3e"/><rect x="555" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="585" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="615" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="645" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="348.0" r="5.5" fill="#2f6f8f"/><rect x="675" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="705" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="735" y="349.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="745" cy="348.0" r="5.5" fill="#e9a23b"/><rect x="465" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="361.5" r="5.5" fill="#e9a23b"/><rect x="495" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="361.5" r="5.5" fill="#7a5a46"/><rect x="525" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="361.5" r="5.5" fill="#2f6f8f"/><rect x="555" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="585" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="595" cy="361.5" r="5.5" fill="#6f7f3e"/><rect x="615" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="361.5" r="5.5" fill="#2f6f8f"/><rect x="645" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="361.5" r="5.5" fill="#9b3a2a"/><rect x="675" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="705" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="735" y="362.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="465" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="375.0" r="5.5" fill="#9b3a2a"/><rect x="495" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="525" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="555" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="375.0" r="5.5" fill="#7a5a46"/><rect x="585" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="615" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="625" cy="375.0" r="5.5" fill="#2f6f8f"/><rect x="645" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="375.0" r="5.5" fill="#2f6f8f"/><rect x="675" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="705" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="375.0" r="5.5" fill="#d9541e"/><rect x="735" y="376.0" width="20" height="9" rx="3" fill="#b9874f"/><rect x="465" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="475" cy="388.5" r="5.5" fill="#d9541e"/><rect x="495" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="505" cy="388.5" r="5.5" fill="#d9541e"/><rect x="525" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="535" cy="388.5" r="5.5" fill="#9b3a2a"/><rect x="555" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="565" cy="388.5" r="5.5" fill="#d9541e"/><rect x="585" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="615" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="645" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="655" cy="388.5" r="5.5" fill="#e9a23b"/><rect x="675" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><rect x="705" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/><circle cx="715" cy="388.5" r="5.5" fill="#6f7f3e"/><rect x="735" y="389.5" width="20" height="9" rx="3" fill="#b9874f"/>
+<rect x="458" y="436" width="70" height="40" rx="4" fill="#e9a23b" opacity=".75"/><rect x="458" y="436" width="70" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" opacity=".7"/>
+<rect x="538" y="440" width="64" height="36" rx="4" fill="#d9541e" opacity=".75"/><rect x="538" y="440" width="64" height="36" rx="4" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" opacity=".7"/>
+<rect x="622" y="436" width="70" height="40" rx="4" fill="#6f7f3e" opacity=".75"/><rect x="622" y="436" width="70" height="40" rx="4" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" opacity=".7"/>
+<rect x="702" y="440" width="66" height="36" rx="4" fill="#e2672b" opacity=".75"/><rect x="702" y="440" width="66" height="36" rx="4" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 4" opacity=".7"/>
+<use href="#ppl" x="470" y="438" width="14" height="28" color="#2f6f8f"/>
+<use href="#ppl" x="495" y="440" width="14" height="28" color="#9b3a2a"/>
+<use href="#ppl" x="555" y="440" width="14" height="28" color="#6f7f3e"/>
+<use href="#ppl" x="640" y="438" width="14" height="28" color="#e9a23b"/>
+<use href="#ppl" x="720" y="442" width="14" height="28" color="#2f6f8f"/>
+<g class="mlab"><rect x="441.0" y="219" width="298" height="32" rx="16" fill="#fffaf1" stroke="#3b2418" stroke-width="1.5"/><text x="590" y="241" text-anchor="middle">무대 · 수어공연 · 영화상영</text></g>
+<g class="mlab"><rect x="27.5" y="197" width="77" height="32" rx="16" fill="#fffaf1" stroke="#3b2418" stroke-width="1.5"/><text x="66" y="219" text-anchor="middle">화장실</text></g>
+<g class="mlab"><rect x="514.0" y="397" width="196" height="32" rx="16" fill="#fffaf1" stroke="#3b2418" stroke-width="1.5"/><text x="612" y="419" text-anchor="middle">관람석 100여 석</text></g>
+<g class="mlab"><rect x="548.0" y="483" width="128" height="32" rx="16" fill="#fffaf1" stroke="#3b2418" stroke-width="1.5"/><text x="612" y="505" text-anchor="middle">돗자리 쉼터</text></g>
+<a href="#b1" class="tent" data-b="1" aria-label="1번 부스 총괄본부"><use href="#tent" x="860" y="50" width="100" height="112" color="#6f7f3e"/><circle cx="910" cy="80" r="16" fill="#fffaf1"/><text class="tn" x="910" y="87" text-anchor="middle">1</text><rect x="871.0" y="164" width="78" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="910" y="182" text-anchor="middle">총괄본부</text><use href="#ppl" x="874" y="120" width="18" height="36" color="#7a5a46"/><use href="#ppl" x="926" y="120" width="18" height="36" color="#9b3a2a"/></a>
+<g class="tent off"><use href="#tent" x="195" y="60" width="100" height="112" color="#8a7564"/><circle cx="245" cy="90" r="16" fill="#fffaf1"/><text class="tn" x="245" y="97" text-anchor="middle">12</text><rect x="183.5" y="174" width="123" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="245" y="192" text-anchor="middle">공연자 대기실</text><use href="#ppl" x="209" y="130" width="18" height="36" color="#e9a23b"/></g>
+<a href="#b2" class="tent" data-b="2" aria-label="2번 부스 슈링클스"><use href="#tent" x="125" y="215" width="100" height="112" color="#d9541e"/><circle cx="175" cy="245" r="16" fill="#fffaf1"/><text class="tn" x="175" y="252" text-anchor="middle">2</text><rect x="136.0" y="329" width="78" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="175" y="347" text-anchor="middle">슈링클스</text><use href="#ppl" x="139" y="285" width="18" height="36" color="#2f6f8f"/><use href="#ppl" x="191" y="285" width="18" height="36" color="#7a5a46"/></a>
+<a href="#b3" class="tent" data-b="3" aria-label="3번 부스 뉴스통역"><use href="#tent" x="225" y="215" width="100" height="112" color="#d9541e"/><circle cx="275" cy="245" r="16" fill="#fffaf1"/><text class="tn" x="275" y="252" text-anchor="middle">3</text><rect x="236.0" y="329" width="78" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="275" y="347" text-anchor="middle">뉴스통역</text><use href="#ppl" x="239" y="285" width="18" height="36" color="#e9a23b"/><use href="#ppl" x="291" y="285" width="18" height="36" color="#7a5a46"/></a>
+<a href="#b4" class="tent" data-b="4" aria-label="4번 부스 수어퍼즐"><use href="#tent" x="325" y="215" width="100" height="112" color="#e09a2b"/><circle cx="375" cy="245" r="16" fill="#fffaf1"/><text class="tn" x="375" y="252" text-anchor="middle">4</text><rect x="336.0" y="329" width="78" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="375" y="347" text-anchor="middle">수어퍼즐</text><use href="#ppl" x="339" y="285" width="18" height="36" color="#e9a23b"/><use href="#ppl" x="391" y="285" width="18" height="36" color="#7a5a46"/></a>
+<a href="#b11" class="tent" data-b="11" aria-label="11번 부스 스탬프"><use href="#tent" x="840" y="265" width="100" height="112" color="#6f7f3e"/><circle cx="890" cy="295" r="16" fill="#fffaf1"/><text class="tn" x="890" y="302" text-anchor="middle">11</text><rect x="858.5" y="379" width="63" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="890" y="397" text-anchor="middle">스탬프</text><use href="#ppl" x="854" y="335" width="18" height="36" color="#9b3a2a"/><use href="#ppl" x="906" y="335" width="18" height="36" color="#2f6f8f"/></a>
+<a href="#b10" class="tent" data-b="10" aria-label="10번 부스 강릉"><use href="#tent" x="820" y="510" width="100" height="112" color="#9b3a2a"/><circle cx="870" cy="540" r="16" fill="#fffaf1"/><text class="tn" x="870" y="547" text-anchor="middle">10</text><rect x="846.0" y="624" width="48" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="870" y="642" text-anchor="middle">강릉</text><use href="#ppl" x="834" y="580" width="18" height="36" color="#6f7f3e"/><use href="#ppl" x="886" y="580" width="18" height="36" color="#2f6f8f"/></a>
+<a href="#b9" class="tent" data-b="9" aria-label="9번 부스 영월·인제"><use href="#tent" x="675" y="520" width="100" height="112" color="#9b3a2a"/><circle cx="725" cy="550" r="16" fill="#fffaf1"/><text class="tn" x="725" y="557" text-anchor="middle">9</text><rect x="678.5" y="634" width="93" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="725" y="652" text-anchor="middle">영월·인제</text><use href="#ppl" x="689" y="590" width="18" height="36" color="#9b3a2a"/><use href="#ppl" x="741" y="590" width="18" height="36" color="#7a5a46"/></a>
+<a href="#b8" class="tent" data-b="8" aria-label="8번 부스 춘천"><use href="#tent" x="530" y="530" width="100" height="112" color="#9b3a2a"/><circle cx="580" cy="560" r="16" fill="#fffaf1"/><text class="tn" x="580" y="567" text-anchor="middle">8</text><rect x="556.0" y="644" width="48" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="580" y="662" text-anchor="middle">춘천</text><use href="#ppl" x="544" y="600" width="18" height="36" color="#e9a23b"/><use href="#ppl" x="596" y="600" width="18" height="36" color="#6f7f3e"/></a>
+<a href="#b7" class="tent" data-b="7" aria-label="7번 부스 도서·영상"><use href="#tent" x="385" y="540" width="100" height="112" color="#9b3a2a"/><circle cx="435" cy="570" r="16" fill="#fffaf1"/><text class="tn" x="435" y="577" text-anchor="middle">7</text><rect x="388.5" y="654" width="93" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="435" y="672" text-anchor="middle">도서·영상</text><use href="#ppl" x="399" y="610" width="18" height="36" color="#7a5a46"/><use href="#ppl" x="451" y="610" width="18" height="36" color="#2f6f8f"/></a>
+<a href="#b6" class="tent" data-b="6" aria-label="6번 부스 홍천"><use href="#tent" x="240" y="550" width="100" height="112" color="#d9541e"/><circle cx="290" cy="580" r="16" fill="#fffaf1"/><text class="tn" x="290" y="587" text-anchor="middle">6</text><rect x="266.0" y="664" width="48" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="290" y="682" text-anchor="middle">홍천</text><use href="#ppl" x="254" y="620" width="18" height="36" color="#6f7f3e"/><use href="#ppl" x="306" y="620" width="18" height="36" color="#9b3a2a"/></a>
+<a href="#b5" class="tent" data-b="5" aria-label="5번 부스 원주"><use href="#tent" x="95" y="560" width="100" height="112" color="#d9541e"/><circle cx="145" cy="590" r="16" fill="#fffaf1"/><text class="tn" x="145" y="597" text-anchor="middle">5</text><rect x="121.0" y="674" width="48" height="26" rx="13" fill="#3b2418"/><text class="tl2" x="145" y="692" text-anchor="middle">원주</text><use href="#ppl" x="109" y="630" width="18" height="36" color="#6f7f3e"/><use href="#ppl" x="161" y="630" width="18" height="36" color="#2f6f8f"/></a>
+</svg></div><p class="map-hint">천막을 누르면 부스 소개가 말풍선으로 나와요. 휴대폰에서는 지도를 옆으로 밀어 보세요.</p>
+      <div class="pop" id="pop" hidden role="dialog" aria-labelledby="popT">
+        <button type="button" class="pop-x" id="popX" aria-label="닫기">×</button>
+        <div class="pop-head"><b class="no" id="popN"></b><span class="bt" id="popK"></span></div>
+        <h3 id="popT"></h3><p id="popD"></p><small id="popO"></small>
+        <div class="pop-nav"><button type="button" id="popPrev">‹ 이전 부스</button><button type="button" id="popNext">다음 부스 ›</button></div>
+      </div>
+    </div>
+    <details class="blist"><summary>부스 목록 전체 보기 <span>(11곳)</span></summary>
     <div class="bf" role="group" aria-label="부스 종류 고르기">
       <button type="button" class="on" data-f="all">전체</button><button type="button" data-f="체험">체험</button><button type="button" data-f="게임">게임</button><button type="button" data-f="전시">전시·판매</button><button type="button" data-f="안내">안내</button>
     </div>
     <div class="booths" id="booths">
-      <article class="booth" data-t="안내"><b class="no">1</b><div><span class="bt">안내</span><h3>총괄본부 · 응급의료</h3><p>행사 안내와 응급 처치가 필요할 때 찾아오세요.</p></div></article>
-      <article class="booth" data-t="전시"><b class="no">2</b><div><span class="bt">전시·판매</span><h3>한지공예 · 토탈공예 · 목공예</h3><p>농아인 작품 전시와 한지공예 판매</p><small>영월군농아인협회 · 인제군농아인협회</small></div></article>
-      <article class="booth" data-t="전시"><b class="no">3</b><div><span class="bt">전시·판매</span><h3>퀼트 작품 전시 & 판매</h3><p>농아인 작가들의 퀼트 작품</p><small>강릉시농아인협회 손땀동아리</small></div></article>
-      <article class="booth" data-t="전시 체험"><b class="no">4</b><div><span class="bt">전시·체험</span><h3>가죽공예 · 양말목공예</h3><p>작품 전시와 컵받침 만들기 체험</p><small>춘천시농아인협회</small></div></article>
-      <article class="booth" data-t="체험"><b class="no">5</b><div><span class="bt">체험</span><h3>버려진 현수막, 수어를 담다</h3><p>폐현수막으로 나만의 네임가방 만들기</p><small>홍천군수어통역센터</small></div></article>
-      <article class="booth" data-t="체험 게임"><b class="no">6</b><div><span class="bt">체험</span><h3>QR 찍고! 주사위 굴리고! 수어로 강원 한 바퀴</h3><p>농문화 퀴즈, 다짐카드 쓰기</p><small>원주시수어통역센터</small></div></article>
-      <article class="booth" data-t="체험 게임"><b class="no">7</b><div><span class="bt">체험·게임</span><h3>슈링클스 만들기 · 수어 숫자 마스터</h3><p>나만의 슈링클스 고리 만들기와 지숫자 게임</p></div></article>
-      <article class="booth" data-t="체험"><b class="no">8</b><div><span class="bt">체험</span><h3>나도 뉴스 수어통역사! · 포토존</h3><p>뉴스 화면 속 수어통역사 되어 보기, 4컷 사진 촬영</p></div></article>
-      <article class="booth" data-t="게임"><b class="no">9</b><div><span class="bt">게임</span><h3>디지털 수어퍼즐 · 온라인 방탈출</h3><p>노트북과 휴대폰으로 즐기는 수어 게임</p></div></article>
-      <article class="booth" data-t="전시"><b class="no">10</b><div><span class="bt">전시·홍보</span><h3>수어 도서·영상 전시 · 가치봄 영화축제</h3><p>수어 도서와 영상 자료, 가치봄 영화 소개</p></div></article>
-      <article class="booth star" data-t="안내"><b class="no">12</b><div><span class="bt">스탬프 투어</span><h3>스탬프 판 & 기념품</h3><p>부스를 돌며 스탬프를 모으고 선물뽑기에 도전하세요!</p></div></article>
+      <article class="booth" id="b1" data-t="안내"><b class="no">1</b><div><span class="bt">안내</span><h3>총괄본부 · 응급의료</h3><p>행사 안내와 응급 처치가 필요할 때 찾아오세요.</p></div></article>
+      <article class="booth" id="b2" data-t="체험 게임"><b class="no">2</b><div><span class="bt">체험·게임</span><h3>슈링클스 만들기 · 수어 숫자 마스터</h3><p>나만의 슈링클스 고리 만들기와 지숫자 게임</p></div></article>
+      <article class="booth" id="b3" data-t="체험"><b class="no">3</b><div><span class="bt">체험</span><h3>나도 뉴스 수어통역사! · 포토존</h3><p>뉴스 화면 속 수어통역사 되어 보기, 4컷 사진 촬영</p></div></article>
+      <article class="booth" id="b4" data-t="게임"><b class="no">4</b><div><span class="bt">게임</span><h3>디지털 수어퍼즐 · 온라인 방탈출</h3><p>노트북과 휴대폰으로 즐기는 수어 게임</p></div></article>
+      <article class="booth" id="b5" data-t="체험 게임"><b class="no">5</b><div><span class="bt">체험</span><h3>QR 찍고! 주사위 굴리고! 수어로 강원 한 바퀴</h3><p>농문화 퀴즈, 다짐카드 쓰기</p><small>원주시수어통역센터</small></div></article>
+      <article class="booth" id="b6" data-t="체험"><b class="no">6</b><div><span class="bt">체험</span><h3>버려진 현수막, 수어를 담다</h3><p>폐현수막으로 나만의 네임가방 만들기</p><small>홍천군수어통역센터</small></div></article>
+      <article class="booth" id="b7" data-t="전시"><b class="no">7</b><div><span class="bt">전시·홍보</span><h3>수어 도서·영상 전시 · 가치봄 영화축제</h3><p>수어 도서와 영상 자료, 가치봄 영화 소개</p></div></article>
+      <article class="booth" id="b8" data-t="전시 체험"><b class="no">8</b><div><span class="bt">전시·체험</span><h3>가죽공예 · 양말목공예</h3><p>작품 전시와 컵받침 만들기 체험</p><small>춘천시농아인협회</small></div></article>
+      <article class="booth" id="b9" data-t="전시"><b class="no">9</b><div><span class="bt">전시·판매</span><h3>한지공예 · 토탈공예 · 목공예</h3><p>농아인 작품 전시와 한지공예 판매</p><small>영월군농아인협회 · 인제군농아인협회</small></div></article>
+      <article class="booth" id="b10" data-t="전시"><b class="no">10</b><div><span class="bt">전시·판매</span><h3>퀼트 작품 전시 & 판매</h3><p>농아인 작가들의 퀼트 작품</p><small>강릉시농아인협회 손땀동아리</small></div></article>
+      <article class="booth star" id="b11" data-t="안내"><b class="no">11</b><div><span class="bt">스탬프 투어</span><h3>스탬프 판 & 기념품</h3><p>부스를 돌며 스탬프를 모으고 선물뽑기에 도전하세요!</p></div></article>
     </div>
+    </details>
   </section>
 
   <section id="guestbook">
@@ -403,6 +512,57 @@ document.querySelectorAll('.bf button').forEach(b => b.addEventListener('click',
   document.querySelectorAll('.bf button').forEach(x => x.classList.toggle('on', x === b));
   document.querySelectorAll('#booths .booth').forEach(c => c.hidden = b.dataset.f !== 'all' && !c.dataset.t.includes(b.dataset.f));
 }));
+
+// 배치도 천막 누르면 말풍선
+(function(){
+  const pop = document.getElementById('pop'), wrap = document.querySelector('.map-wrap');
+  const tents = [...document.querySelectorAll('.fmap a.tent')].sort((x, y) => x.dataset.b - y.dataset.b);
+  const $ = id => document.getElementById(id);
+  const mobile = () => matchMedia('(max-width:700px)').matches;
+  let cur = -1;
+
+  function show(i) {
+    cur = (i + tents.length) % tents.length;
+    const t = tents[cur], n = t.dataset.b, card = $('b' + n);
+    tents.forEach(x => x.classList.toggle('sel', x === t));
+    $('popN').textContent = n;
+    $('popK').textContent = card.querySelector('.bt').textContent;
+    $('popT').textContent = card.querySelector('h3').textContent;
+    $('popD').textContent = card.querySelector('p').textContent;
+    const o = card.querySelector('small'); $('popO').textContent = o ? o.textContent : '';
+    pop.hidden = false;
+    if (mobile()) {
+      pop.style.left = pop.style.top = '';
+      t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+      return;
+    }
+    // 컴퓨터: 천막 바로 위(자리가 없으면 아래)에 말풍선
+    const w = wrap.getBoundingClientRect(), r = t.getBoundingClientRect();
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const cx = r.left + r.width / 2 - w.left;
+    let left = Math.max(8, Math.min(cx - pw / 2, w.width - pw - 8));
+    let top = r.top - w.top - ph - 14, up = true;
+    if (top < 0) { top = r.bottom - w.top + 14; up = false; }
+    pop.style.left = left + 'px'; pop.style.top = top + 'px';
+    pop.style.setProperty('--ax', Math.max(20, Math.min(cx - left, pw - 20)) + 'px');
+    pop.classList.toggle('up', up); pop.classList.toggle('down', !up);
+  }
+  function hide() { pop.hidden = true; tents.forEach(x => x.classList.remove('sel')); cur = -1; }
+
+  tents.forEach((t, i) => t.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); cur === i && !pop.hidden ? hide() : show(i); }));
+  $('popX').addEventListener('click', hide);
+  $('popPrev').addEventListener('click', () => show(cur - 1));
+  $('popNext').addEventListener('click', () => show(cur + 1));
+  pop.addEventListener('click', e => e.stopPropagation());
+  document.addEventListener('click', () => { if (!pop.hidden) hide(); });
+  document.addEventListener('keydown', e => {
+    if (pop.hidden) return;
+    if (e.key === 'Escape') hide();
+    if (e.key === 'ArrowRight') show(cur + 1);
+    if (e.key === 'ArrowLeft') show(cur - 1);
+  });
+  addEventListener('resize', () => { if (!pop.hidden) show(cur); });
+})();
 
 // D-day & 진행 중 표시 (한국시간 기준)
 (function(){
