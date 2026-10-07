@@ -51,12 +51,13 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .poster:hover{transform:rotate(0)}
 
 /* nav */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
-nav a{flex:none;text-decoration:none;padding:6px 14px;border-radius:999px;font-weight:500;font-size:.95rem;color:var(--muted)}
-nav a:hover,nav a:focus-visible{background:var(--chip);color:var(--ink);outline:none}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:2px solid var(--line);box-shadow:0 6px 14px -12px rgba(60,30,10,.5)}
+nav .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav a{flex:none;text-decoration:none;padding:8px 16px;border-radius:999px;font-weight:700;font-size:1rem;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);transition:background .15s,color .15s,border-color .15s}
+nav a:hover,nav a:focus-visible{border-color:var(--maple);color:var(--maple);outline:none}
+nav a.on{background:var(--maple);border-color:var(--maple);color:#fff}
 
-section{padding-block:56px 8px}
+section{padding-block:56px 8px;scroll-margin-top:60px}
 .sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:24px}
 .sec-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.7rem,4.5vw,2.3rem)}
 .sec-head p{margin:0;color:var(--muted);font-size:.95rem}
@@ -85,6 +86,7 @@ section{padding-block:56px 8px}
 .tl .teams li{display:block;padding:0;font-size:.93rem}
 .tl .teams li::after{display:none}
 .tl .teams b{font-weight:700}
+.tl .teams i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--chip);color:var(--maple);font-size:.72rem;font-weight:700;margin-right:6px;vertical-align:1px;font-variant-numeric:tabular-nums}
 .tl .teams span{color:var(--muted);margin-left:8px;font-size:.86rem}
 @media (max-width:760px){.tl .teams span{display:block;margin-left:0}}
 .tl .ep{font-size:.88rem;line-height:1.6;margin-top:4px}
@@ -304,12 +306,12 @@ footer b{color:var(--ink);font-weight:500}
   <section id="schedule">
     <div class="sec-head"><svg class="leaf-mark" viewBox="0 0 24 24"><use href="#maple"/></svg><h2>시간표</h2><p>10월 24일(토)</p></div>
     <ol class="tl" id="tl">
-      <li data-s="11:00" data-e="12:00"><time>11:00<br>12:00</time><div class="body"><span class="kind">공연</span><h3>개회 · 축하 영상 · 수어공연 3팀<span class="live">진행 중</span></h3><ul class="teams"><li><b>별빛 같은 나의 사랑아</b><span>노래 · 두 손이 언어가 되다(횡성군)</span></li><li><b>손으로 말해요</b><span>노래 · 철원군농아인협회</span></li><li><b>작은 손짓, 큰 시작</b><span>연설 · 속초시농아인협회</span></li></ul></div></li>
+      <li data-s="11:00" data-e="12:00"><time>11:00<br>12:00</time><div class="body"><span class="kind">공연</span><h3>개회 · 축하 영상 · 수어공연 3팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>1</i><b>아기돼지 삼형제</b><span>노래극 · 온남매(춘천)</span></li><li><i>2</i><b>별빛 같은 나의 사랑아</b><span>노래 · 두 손이 언어가 되다(횡성)</span></li><li><i>3</i><b>작은 손짓, 큰 시작</b><span>연설 · 김지현(속초)</span></li></ul></div></li>
       <li class="film" data-s="12:00" data-e="13:00"><time>12:00<br>13:00</time><div class="body"><span class="kind">특별 상영</span><h3>EBS 〈지구영웅 번개맨〉 시즌3 "번개가 축제가 되는 날"<span class="live">진행 중</span></h3><p class="ep">시즌 3, 에피소드 13 · 번개맨을 가장 좋아하는 일곱 살 태평. 농인 부모님의 사랑도 듬뿍, 짝사랑하는 지구와의 관계도 청신호다. 여느 때처럼 행복하게 번개맨 공연을 보러 가던 태평은 예기치 못한 지하철 고장을 맞닥뜨린다. 낯선 시선에 충동적으로 엄마에게 화를 낸 태평. 과연 엉킨 오해를 풀고 소리 너머 진짜 마음을 전할 수 있을까?</p></div></li>
       <li class="film" data-s="13:00" data-e="14:00"><time>13:00<br>14:00</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>13:00 〈높이뛰기〉 · 13:20 〈정적〉</p></div></li>
-      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레 · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><b>아기돼지 삼형제</b><span>노래극 · 온남매</span></li><li><b>역사의 몸짓</b><span>노래극 · 강릉시지회</span></li></ul></div></li>
+      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레(김우경) · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>4</i><b>혼자 걷지 않을 거예요</b><span>노래 · 이수정(동해)</span></li><li><i>5</i><b>역사의 몸짓(진검 무예)</b><span>노래극 · 장현미·한명화(강릉)</span></li></ul></div></li>
       <li class="film" data-s="14:30" data-e="15:30"><time>14:30<br>15:30</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>14:30 〈봄의 언어〉 · 15:00 〈내 귀가 되어줘〉</p></div></li>
-      <li data-s="15:30" data-e="16:00"><time>15:30<br>16:00</time><div class="body"><span class="kind">공연</span><h3>수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><b>혼자 걷지 않을 거에요.</b><span>노래 · 동해시지회</span></li><li><b>풍선</b><span>노래 · T=I</span></li></ul></div></li>
+      <li data-s="15:30" data-e="16:00"><time>15:30<br>16:00</time><div class="body"><span class="kind">공연</span><h3>수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>6</i><b>손으로 말해요</b><span>노래 · 손으로 말해요(철원)</span></li><li><i>7</i><b>풍선</b><span>노래 · T=I(춘천)</span></li></ul></div></li>
     </ol>
     <p class="note">부대행사는 11:00~16:00 운영하며, 12:00~13:00에는 쉬어 갑니다. 일정은 상황에 따라 바뀔 수 있습니다.</p>
   </section>
@@ -790,6 +792,22 @@ document.querySelectorAll('.bf button').forEach(b => b.addEventListener('click',
     if (e.key === 'ArrowLeft') show(cur - 1);
   });
   addEventListener('resize', () => { if (!pop.hidden) show(cur); });
+})();
+
+// 메뉴: 지금 보고 있는 칸 표시
+(function(){
+  const links = [...document.querySelectorAll('nav a[href^="#"]')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function upd(){
+    const y = innerHeight * 0.3; let cur = null;
+    secs.forEach(sec => { if (sec.getBoundingClientRect().top <= y) cur = sec; });
+    links.forEach(a => {
+      const on = cur && a.getAttribute('href') === '#' + cur.id;
+      if (on && !a.classList.contains('on')) a.scrollIntoView({ block: 'nearest', inline: 'center' });
+      a.classList.toggle('on', !!on);
+    });
+  }
+  addEventListener('scroll', upd, { passive: true }); upd();
 })();
 
 // D-day & 진행 중 표시 (한국시간 기준)
