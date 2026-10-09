@@ -262,6 +262,15 @@ section{padding-block:56px 8px;scroll-margin-top:60px}
 footer{margin-top:64px;padding-block:32px 40px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 footer .orgs{display:flex;flex-wrap:wrap;gap:8px 28px}
 footer b{color:var(--ink);font-weight:500}
+.credit{margin:14px 2px 0;font-size:.88rem;color:var(--muted)}
+.credit b{color:var(--ink);font-weight:700}
+.ask{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:16px 18px;margin-bottom:20px;border-radius:16px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.ask-t{font-size:1rem;font-weight:700}
+.ask-org{font-weight:700}
+.ask-links{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.ask-links a{display:inline-flex;align-items:center;gap:4px;padding:7px 14px;border-radius:999px;background:var(--chip);color:var(--ink);text-decoration:none;font-weight:500;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ask-links a:hover,.ask-links a:focus-visible{background:var(--maple);color:#fff;outline:none}
+.ask-links a.kakao{background:#fee500;color:#191919}
 
 @media (max-width:760px){
   .hero{grid-template-columns:1fr;padding-block:32px 24px;gap:28px}
@@ -317,7 +326,7 @@ footer b{color:var(--ink);font-weight:500}
       <li data-s="11:00" data-e="12:00"><time>11:00<br>12:00</time><div class="body"><span class="kind">공연</span><h3>개회 · 축하 영상 · 수어공연 3팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>1</i><b>아기돼지 삼형제</b><span>노래(극) · 온남매(춘천)</span></li><li><i>2</i><b>별빛 같은 나의 사랑아</b><span>노래(극) · 두 손이 언어가 되다(횡성)</span></li><li><i>3</i><b>작은 손짓, 큰 시작</b><span>연설 · 김지현(속초)</span></li></ul></div></li>
       <li class="film" data-s="12:00" data-e="13:00"><time>12:00<br>13:00</time><div class="body"><span class="kind">영상</span><h3>수어영상 상영<span class="live">진행 중</span></h3></div></li>
       <li class="film" data-s="13:00" data-e="14:00"><time>13:00<br>14:00</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>13:00 〈높이뛰기〉 · 13:20 〈정적〉</p></div></li>
-      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레(김우경) · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>4</i><b>혼자 걷지 않을 거예요</b><span>노래(극) · 이수정(동해)</span></li><li><i>5</i><b>손으로 말해요</b><span>노래(극) · 달빛손짓(철원)</span></li></ul></div></li>
+      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레(김우경) · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>4</i><b>혼자 걷지 않을 거예요</b><span>노래(극) · 이수정(동해)</span></li><li><i>5</i><b>손으로 말해요</b><span>노래(극) · 손으로 말해요(철원)</span></li></ul></div></li>
       <li class="film" data-s="14:30" data-e="15:30"><time>14:30<br>15:30</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>14:30 〈봄의 언어〉 · 15:00 〈내 귀가 되어줘〉</p></div></li>
       <li data-s="15:30" data-e="16:00"><time>15:30<br>16:00</time><div class="body"><span class="kind">공연</span><h3>수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>6</i><b>역사의 몸짓(진검 무예)</b><span>노래(극) · 장현미·한명화(강릉)</span></li><li><i>7</i><b>풍선</b><span>노래(극) · T=I(춘천)</span></li></ul></div></li>
     </ol>
@@ -340,6 +349,7 @@ footer b{color:var(--ink);font-weight:500}
         <div class="meta"><span>2023</span><span>21분</span><span class="award">2023 가치봄영화제 개막작</span></div>
         <p>전 여자친구 승윤이 남기고 간 아기를 자신의 아들이라 여기며 키우던 남자. 승윤을 동네에서 봤다는 말에 아기와 함께 그녀를 찾아 나섭니다.</p></article>
     </div>
+    <p class="credit">콘텐츠 제공: <b>한국농아인협회</b></p>
   </section>
 
   <section id="quiz">
@@ -510,6 +520,16 @@ footer b{color:var(--ink);font-weight:500}
 </main>
 
 <footer><div class="wrap">
+  <div class="ask">
+    <b class="ask-t">💬 문의</b>
+    <span class="ask-org">강원특별자치도수어문화원</span>
+    <div class="ask-links">
+      <a href="tel:033-252-8746">☎️ 033-252-8746</a>
+      <a href="tel:010-5026-8746">📱 010-5026-8746</a>
+      <a href="mailto:gw03@gwdeaf.or.kr">✉️ gw03@gwdeaf.or.kr</a>
+      <a class="kakao" id="kakaoBtn" href="#" target="_blank" rel="noopener" hidden>💛 카카오톡 문의</a>
+    </div>
+  </div>
   <div class="orgs"><span>주최·주관 <b>강원특별자치도농아인협회</b></span><span>후원 <b>강원특별자치도 · 강원특별자치도교육청</b></span></div>
   <p>2026 강원특별자치도 시각·청각장애인 문화관람 지원사업 〈가치봄 영화축제〉</p>
 </div></footer>
@@ -816,6 +836,10 @@ document.querySelectorAll('.bf button').forEach(b => b.addEventListener('click',
   }
   addEventListener('scroll', upd, { passive: true }); upd();
 })();
+
+// 카카오톡 문의: 카카오톡 채널 주소를 아래 따옴표 안에 넣으면 버튼이 나타나요 (예: https://pf.kakao.com/_xxxxx/chat)
+const KAKAO_CHAT_URL = 'https://pf.kakao.com/_KxkhMM/chat';
+if (KAKAO_CHAT_URL) { const k = document.getElementById('kakaoBtn'); k.href = KAKAO_CHAT_URL; k.hidden = false; }
 
 // D-day & 진행 중 표시 (한국시간 기준)
 (function(){
