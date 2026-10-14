@@ -86,6 +86,7 @@ section{padding-block:56px 8px;scroll-margin-top:60px}
 .tl .teams li{display:block;padding:0;font-size:.93rem}
 .tl .teams li::after{display:none}
 .tl .teams b{font-weight:700}
+.tl .teams li.sp i{background:var(--maple);color:#fff}
 .tl .teams i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--chip);color:var(--maple);font-size:.72rem;font-weight:700;margin-right:6px;vertical-align:1px;font-variant-numeric:tabular-nums}
 .tl .teams span{color:var(--muted);margin-left:8px;font-size:.86rem}
 @media (max-width:760px){.tl .teams span{display:block;margin-left:0}}
@@ -273,6 +274,8 @@ footer b{color:var(--ink);font-weight:500}
 .ask-links a.kakao{background:#fee500;color:#191919}
 
 @media (max-width:760px){
+  .hero h1 .pc-br{display:none}
+  .hero h1{white-space:nowrap;font-size:min(8.4vw,2.6rem)}
   .hero{grid-template-columns:1fr;padding-block:32px 24px;gap:28px}
   .poster{width:260px;order:-1;transform:rotate(-1.5deg)}
   .about,.place{grid-template-columns:1fr}
@@ -292,7 +295,7 @@ footer b{color:var(--ink);font-weight:500}
 <header class="wrap hero">
   <div>
     <div class="eyebrow">모두의 언어, 수어</div>
-    <h1><span class="yr">2026</span> 강원<br>수어문화제</h1>
+    <h1><span class="yr">2026</span> 강원<br class="pc-br">수어문화제</h1>
     <div class="with">with <b>2026 가치봄 영화축제</b></div>
     <div class="facts">
       <div><span>일시</span><strong>2026. 10. 24.(토) 11:00~16:00</strong></div>
@@ -326,7 +329,7 @@ footer b{color:var(--ink);font-weight:500}
       <li data-s="11:00" data-e="12:00"><time>11:00<br>12:00</time><div class="body"><span class="kind">공연</span><h3>개회 · 축하 영상 · 수어공연 3팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>1</i><b>아기돼지 삼형제</b><span>노래(극) · 온남매(춘천)</span></li><li><i>2</i><b>별빛 같은 나의 사랑아</b><span>노래(극) · 두 손이 언어가 되다(횡성)</span></li><li><i>3</i><b>작은 손짓, 큰 시작</b><span>연설 · 김지현(속초)</span></li></ul></div></li>
       <li class="film" data-s="12:00" data-e="13:00"><time>12:00<br>13:00</time><div class="body"><span class="kind">영상</span><h3>수어영상 상영<span class="live">진행 중</span></h3></div></li>
       <li class="film" data-s="13:00" data-e="14:00"><time>13:00<br>14:00</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>13:00 〈높이뛰기〉 · 13:20 〈정적〉</p></div></li>
-      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레(김우경) · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>4</i><b>혼자 걷지 않을 거예요</b><span>노래(극) · 이수정(동해)</span></li><li><i>5</i><b>손으로 말해요</b><span>노래(극) · 달빛손짓(철원)</span></li></ul></div></li>
+      <li data-s="14:00" data-e="14:30"><time>14:00<br>14:30</time><div class="body"><span class="kind">공연</span><h3>특별공연 수어민들레(김우경) · 수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li class="sp"><i>특</i><b>ZOO</b><span>VV · 특별공연 수어민들레(김우경)</span></li><li><i>4</i><b>혼자 걷지 않을 거예요</b><span>노래(극) · 이수정(동해)</span></li><li><i>5</i><b>꽃같은 네가 좋아</b><span>노래(극) · 달빛손짓(철원)</span></li></ul></div></li>
       <li class="film" data-s="14:30" data-e="15:30"><time>14:30<br>15:30</time><div class="body"><span class="kind">영화</span><h3>가치봄 영화 상영 2편<span class="live">진행 중</span></h3><p>14:30 〈봄의 언어〉 · 15:00 〈내 귀가 되어줘〉</p></div></li>
       <li data-s="15:30" data-e="16:00"><time>15:30<br>16:00</time><div class="body"><span class="kind">공연</span><h3>수어공연 2팀<span class="live">진행 중</span></h3><ul class="teams"><li><i>6</i><b>역사의 몸짓(진검 무예)</b><span>노래(극) · 장현미·한명화(강릉)</span></li><li><i>7</i><b>풍선</b><span>노래(극) · T=I(춘천)</span></li></ul></div></li>
     </ol>
