@@ -859,7 +859,7 @@ if (KAKAO_CHAT_URL) { const k = document.getElementById('kakaoBtn'); k.href = KA
   if (diff === 0) {
     const m = kst.getHours() * 60 + kst.getMinutes();
     const toM = s => { const [h, mm] = s.split(':'); return +h * 60 + +mm; };
-    document.querySelectorAll('#tl li').forEach(li => {
+    document.querySelectorAll('#tl li[data-s][data-e]').forEach(li => {
       if (m >= toM(li.dataset.s) && m < toM(li.dataset.e)) li.classList.add('now');
     });
   }
@@ -911,10 +911,16 @@ document.getElementById('copyBtn').addEventListener('click', e => {
     + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&hourly=temperature_2m,precipitation_probability,weather_code';
   const W = c => c === 0 ? ['☀️','맑음'] : c <= 2 ? ['🌤️','구름 조금'] : c === 3 ? ['☁️','흐림'] : c <= 48 ? ['🌫️','안개']
     : c <= 57 ? ['🌦️','이슬비'] : c <= 67 ? ['🌧️','비'] : c <= 77 ? ['🌨️','눈'] : c <= 82 ? ['🌦️','소나기'] : c <= 86 ? ['🌨️','눈'] : ['⛈️','뇌우'];
-  const fail = msg => { el.innerHTML = '<span class="wx-load">🌤️ ' + msg + '</span>'; };
-  fetch(U).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+  const LINK = ' <a href="https://search.naver.com/search.naver?query=%EC%B6%98%EC%B2%9C+%EB%82%A0%EC%94%A8" target="_blank" rel="noopener">춘천 날씨 바로 보기 ›</a>';
+  const fail = msg => { el.innerHTML = '<span class="wx-load">🌤️ ' + msg + LINK + '</span>'; };
+  // 날짜를 빼고 '오늘부터 2일' 예보로 한 번 더 시도 (행사 당일에도 안정적으로 받기)
+  const U2 = U.replace('&start_date=2026-10-24&end_date=2026-10-24', '&forecast_days=2');
+  const get = u => fetch(u, { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  get(U).catch(() => get(U2)).then(d => {
+    const k = d.daily && d.daily.time ? d.daily.time.indexOf('2026-10-24') : -1;
+    if (k > 0) for (const key in d.daily) if (Array.isArray(d.daily[key])) d.daily[key] = d.daily[key].slice(k);
     const dl = d.daily, h = d.hourly;
-    if (!dl || !dl.time || !dl.time.length || dl.weather_code[0] == null) return fail('행사 날 날씨 예보는 행사 약 2주 전부터 볼 수 있어요.');
+    if (!dl || !dl.time || !dl.time.length || dl.weather_code[0] == null) return fail('날씨 예보를 아직 받지 못했어요.');
     const [ic, tx] = W(dl.weather_code[0]);
     const hi = Math.round(dl.temperature_2m_max[0]), lo = Math.round(dl.temperature_2m_min[0]);
     const rain = dl.precipitation_probability_max[0] ?? 0, wind = dl.wind_speed_10m_max[0] ?? 0;
@@ -941,7 +947,7 @@ document.getElementById('copyBtn').addEventListener('click', e => {
       + '<ol class="wx-hr" aria-label="행사 시간 날씨">' + hrs.map(i => '<li><small>' + (+h.time[i].slice(11,13)) + '시</small><i>' + W(h.weather_code[i])[0] + '</i><b>' + Math.round(h.temperature_2m[i]) + '°</b><em>☂ ' + (h.precipitation_probability[i] ?? 0) + '%</em></li>').join('') + '</ol>'
       + '<ul class="wx-tips">' + tips.map(t => '<li>' + t + '</li>').join('') + '</ul>'
       + '<p class="wx-note">예보는 바뀔 수 있어요 · ' + (now.getMonth()+1) + '/' + now.getDate() + ' ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ' 기준 · 날씨 정보: Open-Meteo</p>';
-  }).catch(() => fail('날씨 정보를 불러오지 못했어요. 인터넷 연결을 확인해 주세요.'));
+  }).catch(() => fail('날씨 정보를 불러오지 못했어요.'));
 })();
 </script>
 
